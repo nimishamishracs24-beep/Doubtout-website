@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ask a Doubt</title>
+</head>
+<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e6f0ed; /* soft background for full page */
+    }
+
+    header {
+      background-color: #0d7368; /* teal-green header like in image */
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    header img {
+      height: 90px;
+    }
+
+    /* Navigation bar */
+    nav {
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0d7368;
+      font-size: 22px;
+      margin: 0 25px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main section */
+    section {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+<body>
+  <header>
+        <div class="logo container" style="text-align: center;">
+            <img src="/proj_logo.jpg" alt="DoubtOut logo" height=90px>
+            <h2>DoubtOut</h2>
+        </div>
+    </header>
+
+  <!-- Centered Heading -->
+  <table width="100%">
+    <tr>
+      <td align="center">
+        <h1><u>Ask a Doubt</u></h1>
+      </td>
+    </tr>
+  </table>
+  <p style="text-align: center; font-size: 25px;">
+    <a href="#questions" style="margin-right:30px;">My Questions</a>
+    <a href="#contributions" style="margin-right:30px;">My Contributions</a>
+    <a href="doubts.html" style="margin-right:30px;">Ask a Doubt</a>
+    <a href="#bookmarks" style="margin-right:30px;">Bookmarks</a>
+    <a href="practice_session.html" style="margin-right:30px;">Practice Sessions</a>
+  </p>
+
+  <form style="text-align: center; color:rgb(0, 0, 0);background-color: #0d7368;">
+
+    <!-- Branch Selection -->
+    <label for="branch" style="color: w;">Select Branch:</label><br>
+    <select id="branch" name="branch">
+      <option value="">--Select Branch--</option>
+      <option value="civil">Civil Engineering</option>
+      <option value="mech">Mechanical Engineering</option>
+      <option value="eee">Electrical and Electronics Engineering</option>
+      <option value="ece">Electronics and Communication Engineering</option>
+      <option value="iem">Industrial Engineering and Management</option>
+      <option value="cse">Computer Science and Engineering</option>
+      <option value="ete">Electronics and Telecommunication Engineering</option>
+      <option value="ise">Information Science and Engineering</option>
+      <option value="eie">Electronics and Instrumentation Engineering</option>
+      <option value="mee">Medical Electronics Engineering</option>
+      <option value="che">Chemical Engineering</option>
+      <option value="bt">Bio-Technology</option>
+      <option value="mca">Computer Applications (MCA)</option>
+      <option value="msrc">Management Studies and Research Centre</option>
+      <option value="math">Mathematics Department</option>
+      <option value="phy">Physics Department</option>
+      <option value="chem">Chemistry Department</option>
+      <option value="aero">Aerospace Engineering</option>
+      <option value="ml">Machine Learning (AI and ML)</option>
+      <option value="csds">Computer Science and Engineering (DS)</option>
+      <option value="csiot">Computer Science and Engineering (IoT and CS)</option>
+      <option value="aid">Artificial Intelligence and Data Science</option>
+      <option value="csbs">Computer Science and Business Systems</option>
+    </select>
+    <br><br>
+
+    <!-- Semester Selection -->
+    <label for="semester">Select Semester:</label><br>
+    <select id="semester" name="semester">
+      <option value="">--Select Semester--</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+      <option value="3">Semester 3</option>
+      <option value="4">Semester 4</option>
+      <option value="5">Semester 5</option>
+      <option value="6">Semester 6</option>
+      <option value="7">Semester 7</option>
+      <option value="8">Semester 8</option>
+    </select>
+    <br><br>
+
+    <!-- Course Selection -->
+    <label for="course">Select Course:</label><br>
+    <select id="course" name="course">
+      <option value="">--Select Course--</option>
+      <option value="maths">Mathematics</option>
+      <option value="dsa">Data Structures</option>
+      <option value="os">Operating Systems</option>
+      <option value="networks">Computer Networks</option>
+    </select>
+    <br><br>
+
+    <!-- Write Question -->
+    <label for="question">Your Question:</label><br>
+    <textarea id="question" name="question" rows="5" cols="40" placeholder="Type your question here..."></textarea>
+    <br><br>
+
+    <!-- Mention Professor -->
+    <label for="professor">Mention Professor:</label><br>
+    <select id="professor" name="professor">
+      <option value="">--Select Professor--</option>
+      <option value="prof_a">Prof. A. Sharma</option>
+      <option value="prof_b">Prof. B. Verma</option>
+      <option value="prof_c">Prof. C. Iyer</option>
+      <option value="prof_d">Prof. D. Nair</option>
+      <option value="prof_e">Prof. E. Khan</option>
+    </select>
+    <br><br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Submit Your Doubt" style="background-color:white; color: black;">
+
+  </form>
+
+</body>
+</html>

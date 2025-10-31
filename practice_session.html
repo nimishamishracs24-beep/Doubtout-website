@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice Session</title>
+</head>
+<body>
+    <header>
+        <div class="logo container" style="text-align: center;">
+            <img src="/proj_logo.jpg" alt="DoubtOut logo" height=90px>
+            <h2>DoubtOut</h2>
+        </div>
+    </header>
+    <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e6f0ed; /* soft background for full page */
+    }
+
+    header {
+      background-color: #0d7368; /* teal-green header like in image */
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    header img {
+      height: 90px;
+    }
+
+    /* Navigation bar */
+    nav {
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0d7368;
+      font-size: 22px;
+      margin: 0 25px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main section */
+    section {
+      text-align: center;
+      padding: 20px;
+    }
+    </style>
+  <!-- Centered Heading -->
+  <table width="100%">
+    <tr>
+      <td align="center">
+        <h1><u>Practice Session</u></h1>
+      </td>
+    </tr>
+  </table>
+  <p style="text-align: center; font-size: 25px;">
+    <a href="#questions" style="margin-right:30px;">My Questions</a>
+    <a href="#contributions" style="margin-right:30px;">My Contributions</a>
+    <a href="doubts.html" style="margin-right:30px;">Ask a Doubt</a>
+    <a href="#bookmarks" style="margin-right:30px;">Bookmarks</a>
+    <a href="practice_session.html" style="margin-right:30px;">Practice Sessions</a>
+  </p>
+
+  <!-- Horizontal Bar with Dropdowns -->
+  <table width="100%" style="background-color: #0d7368;">
+    <tr>
+      <!-- Course Selection -->
+      <td>
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+          <option value="">--Select Course--</option>
+          <option value="maths">Mathematics</option>
+          <option value="dsa">Data Structures</option>
+          <option value="os">Operating Systems</option>
+          <option value="networks">Computer Networks</option>
+        </select>
+      </td>
+
+      <!-- Topic Selection -->
+      <td>
+        <label for="topic">Topic:</label>
+        <select id="topic" name="topic">
+          <option value="">--Select Topic--</option>
+          <option value="arrays">Arrays</option>
+          <option value="linkedlist">Linked List</option>
+          <option value="trees">Trees</option>
+          <option value="recursion">Recursion</option>
+        </select>
+      </td>
+
+      <!-- Question Status -->
+      <td>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+          <option value="">--Select--</option>
+          <option value="answered">Answered</option>
+          <option value="unanswered">Unanswered</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+  <!-- Difficulty Options (Visible Always in HTML Only Version) -->
+  <table width="100%" style="background-color: #0d7368;">
+    <tr>
+      <td align="center">
+        <label><input type="checkbox" name="difficulty" value="easy"> Easy</label>
+        <label><input type="checkbox" name="difficulty" value="medium"> Medium</label>
+        <label><input type="checkbox" name="difficulty" value="hard"> Hard</label>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
