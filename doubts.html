@@ -177,7 +177,7 @@
 
     
     <!-- JavaScript for Form Submission using localStorage and Backend API -->
-   <script>
+<script>
 const API_URL = "http://localhost:3000/api";
 
 const branchSelect = document.getElementById("branch");
@@ -185,84 +185,9 @@ const semesterSelect = document.getElementById("semester");
 const courseSelect = document.getElementById("course");
 const form = document.getElementById("doubt-form");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const userData = localStorage.getItem("doubtoutUser");
-    if (!userData) {
-        alert("Please login to submit a doubt.");
-        window.location.href = "login.html";
-        return;
-    }
-
-    const user = JSON.parse(userData);
-
-    const payload = {
-        user_id: Number(user.user_id),
-        branch: Number(document.getElementById("branch").value),
-        semester: Number(document.getElementById("semester").value),
-        course: document.getElementById("course").value,
-        question: document.getElementById("question").value.trim(),
-        professor: document.getElementById("professor").value || null
-    };
-
-    if (!payload.course || !payload.question) {
-        alert("Please fill all required fields.");
-        return;
-    }
-
-    try {
-        const res = await fetch(`${API_URL}/doubts`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-            alert(data.error || "Failed to submit doubt");
-            return;
-        }
-
-        const card = document.querySelector(".hand-drawn-card");
-
-card.innerHTML = `
-    <div class="p-8 text-center">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-16 w-16 mx-auto text-green-500 mb-4"
-             viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd" />
-        </svg>
-
-        <h3 class="text-2xl font-bold text-gray-800 mb-3">
-            Doubt Submitted!
-        </h3>
-
-        <p class="text-gray-600 mb-6">
-            Your question has been successfully submitted and will be reviewed by professors.
-        </p>
-
-        <a href="student_questions.html"
-           class="cta-button-blue inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold">
-            Go to My Questions
-        </a>
-    </div>
-`;
-
-
-    } catch (err) {
-        console.error("Submit error:", err);
-        alert("Server error while submitting doubt");
-    }
-});
 async function loadSubjects() {
     const departmentId = branchSelect.value;
     const semester = semesterSelect.value;
-
-    courseSelect.innerHTML = `<option value="">Loading subjects...</option>`;
 
     if (!departmentId || !semester) {
         courseSelect.innerHTML = `<option value="">-- Select Subject --</option>`;
@@ -276,48 +201,69 @@ async function loadSubjects() {
         const data = await res.json();
 
         courseSelect.innerHTML = `<option value="">-- Select Subject --</option>`;
-
         data.subjects.forEach(sub => {
             const opt = document.createElement("option");
             opt.value = sub.subject_name;
             opt.textContent = sub.subject_name;
             courseSelect.appendChild(opt);
         });
-
-    } catch (err) {
-        console.error("Failed to load subjects", err);
-        courseSelect.innerHTML = `<option value="">Error loading subjects</option>`;
+    } catch {
+        courseSelect.innerHTML = `<option>Error loading subjects</option>`;
     }
 }
 
 branchSelect.addEventListener("change", loadSubjects);
 semesterSelect.addEventListener("change", loadSubjects);
+
 async function loadProfessors() {
-    const professorSelect = document.getElementById("professor");
-    professorSelect.innerHTML = `<option value="">Loading professors...</option>`;
+    const res = await fetch(`${API_URL}/professors`);
+    const data = await res.json();
+    const dropdown = document.getElementById("professor");
 
-    try {
-        const res = await fetch("http://localhost:3000/api/professors");
-        const data = await res.json();
-
-        professorSelect.innerHTML = `<option value="">-- Select Professor --</option>`;
-
-        data.professors.forEach(p => {
-            const option = document.createElement("option");
-            option.value = p.user_id;   // numeric ID
-            option.textContent = p.full_name;
-            professorSelect.appendChild(option);
-        });
-
-    } catch (err) {
-        console.error("Failed to load professors:", err);
-        professorSelect.innerHTML = `<option value="">Error loading professors</option>`;
-    }
+    dropdown.innerHTML = `<option value="">-- Select Professor --</option>`;
+    data.professors.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.user_id;
+        opt.textContent = p.full_name;
+        dropdown.appendChild(opt);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", loadProfessors);
 
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
+    const user = JSON.parse(localStorage.getItem("doubtoutUser"));
+    if (!user) {
+        alert("Please login");
+        return;
+    }
+
+    const payload = {
+        user_id: user.user_id,
+        branch: Number(branchSelect.value),
+        semester: Number(semesterSelect.value),
+        course: courseSelect.value,
+        question: document.getElementById("question").value.trim(),
+        professor: document.getElementById("professor").value || null
+    };
+
+    const res = await fetch(`${API_URL}/doubts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        document.querySelector(".hand-drawn-card").innerHTML =
+            `<h2 class="text-center text-green-600 text-2xl font-bold">
+                Doubt submitted successfully!
+             </h2>`;
+    } else {
+        alert("Submission failed");
+    }
+});
 </script>
 </body>
 </html>
