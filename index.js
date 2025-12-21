@@ -79,25 +79,21 @@ app.post('/api/doubts', async (req, res) => {
 });
 
 app.get('/api/student/questions/:user_id', async (req, res) => {
-    try {
-        const questions = await db('doubts')
-            .leftJoin('answers', 'doubts.doubt_id', 'answers.doubt_id')
-            .leftJoin('users', 'answers.answered_by', 'users.user_id')
-            .select(
-                'doubts.doubt_id',
-                'doubts.question',
-                'doubts.course',
-                'doubts.status',
-                'answers.answer_text',
-                'users.full_name as answered_by'
-            )
-            .where('doubts.user_id', req.params.user_id)
-            .orderBy('doubts.created_at', 'desc');
+    const questions = await db('doubts')
+  .leftJoin('answers', 'doubts.doubt_id', 'answers.doubt_id')
+  .leftJoin('users', 'answers.answered_by', 'users.user_id')
+  .select(
+    'doubts.doubt_id as question_id',
+    'doubts.question',
+    'doubts.course',
+    'doubts.created_at as created_at',     // ✅ REQUIRED
+    'answers.answer_text',
+    'answers.created_at as answered_at',
+    'users.full_name as answered_by_name'  // ✅ REQUIRED
+  )
+  .where('doubts.user_id', user_id)
+  .orderBy('doubts.created_at', 'desc');
 
-        res.json({ questions });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch questions' });
-    }
 });
 
 /* ---------------- ANSWERS ---------------- */
