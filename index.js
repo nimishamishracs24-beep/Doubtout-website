@@ -79,26 +79,30 @@ app.post('/api/doubts', async (req, res) => {
 });
 
 app.get('/api/student/questions/:user_id', async (req, res) => {
-    try {
-        const questions = await db('doubts')
-            .leftJoin('answers', 'doubts.doubt_id', 'answers.doubt_id')
-            .leftJoin('users', 'answers.answered_by', 'users.user_id')
-            .select(
-                'doubts.doubt_id',
-                'doubts.question',
-                'doubts.course',
-                'doubts.status',
-                'answers.answer_text',
-                'users.full_name as answered_by'
-            )
-            .where('doubts.user_id', req.params.user_id)
-            .orderBy('doubts.created_at', 'desc');
+  const user_id = req.params.user_id;
 
-        res.json({ questions });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch questions' });
-    }
+  try {
+    const questions = await db('doubts')
+      .leftJoin('answers', 'doubts.doubt_id', 'answers.doubt_id')
+      .leftJoin('users', 'answers.answered_by', 'users.user_id')
+      .select(
+        'doubts.doubt_id as question_id',
+        'doubts.question',
+        'doubts.course',
+        db.raw("TO_CHAR(doubts.created_at, 'YYYY-MM-DD') as asked_date"),
+        'answers.answer_text',
+        db.raw("TO_CHAR(answers.created_at, 'YYYY-MM-DD') as answered_date"),
+        'users.full_name as answered_by_name'
+      )
+      .where('doubts.user_id', user_id)
+      .orderBy('doubts.created_at', 'desc');
+
+    res.json({ questions });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to load student questions.' });
+  }
 });
+
 
 /* ---------------- ANSWERS ---------------- */
 app.post('/api/answers', async (req, res) => {
@@ -194,6 +198,31 @@ app.get('/api/archive', async (req, res) => {
     if (search) query.whereILike('doubts.question', `%${search}%`);
 
     res.json({ archive: await query });
+});
+// GET student contributions (approved answers)
+app.get("/api/student/contributions/:studentId", async (req, res) => {
+    const { studentId } = req.params;
+
+    try {
+        const contributions = await db("practice_answers")
+            .join("doubts", "practice_answers.doubt_id", "doubts.doubt_id")
+            .join("users as prof", "practice_answers.reviewed_by", "prof.user_id")
+            .select(
+                "practice_answers.practice_id",
+                "doubts.question",
+                "doubts.course",
+                "practice_answers.status",
+                "prof.full_name as professor_name"
+            )
+            .where("practice_answers.student_id", studentId)
+            .where("practice_answers.status", "correct")
+            .orderBy("practice_answers.reviewed_at", "desc");
+
+        res.json({ contributions });
+    } catch (err) {
+        console.error("Student contributions error:", err);
+        res.status(500).json({ error: "Failed to load contributions" });
+    }
 });
 
 /* ---------------- SERVER ---------------- */

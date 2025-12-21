@@ -1,4 +1,4 @@
-require("dotenv").config();   // 👈 THIS LINE WAS MISSING
+require("dotenv").config();  
 const knex = require("knex");
 
 // PostgreSQL config
