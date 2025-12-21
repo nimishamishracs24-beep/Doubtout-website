@@ -200,6 +200,29 @@ app.get('/api/leaderboard', async (req, res) => {
 
     res.json({ leaderboard });
 });
+app.get("/api/professor/doubts/:professorId", async (req, res) => {
+    const professorId = Number(req.params.professorId);
+
+    try {
+        const doubts = await db("doubts")
+            .leftJoin("answers", "doubts.doubt_id", "answers.doubt_id")
+            .join("users", "doubts.asked_by", "users.user_id")
+            .select(
+                "doubts.doubt_id",
+                "doubts.question",
+                "doubts.course",
+                "doubts.created_at",
+                "users.name as student_name"
+            )
+            .where("doubts.assigned_professor_id", professorId)
+            .whereNull("answers.answer_id"); // unanswered only
+
+        res.json({ doubts });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to load doubts" });
+    }
+});
 
 /* ---------------- ANSWER ARCHIVE ---------------- */
 app.get('/api/archive', async (req, res) => {
