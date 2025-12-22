@@ -133,7 +133,7 @@
     </footer>
 
     <script>
-        const API_URL = 'http://localhost:3000/api'; 
+        const API_URL = 'http://doubtout-website.onrender.com/api'; 
         const form = document.getElementById('student-login-form');
         const submitButton = document.getElementById('login-submit-btn');
 
@@ -225,7 +225,7 @@
                 }
             } catch (error) {
                 console.error('[CLIENT ERROR] Network or Fetch Error:', error);
-                showMessage("Connection Error", "Cannot reach the backend server. Please verify your server is running on http://localhost:3000.", 'error');
+                showMessage("Connection Error", "Cannot reach the backend server. Please verify your server is running on http://doubtout-website.onrender.com.", 'error');
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Login to Dashboard';
