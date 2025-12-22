@@ -7,7 +7,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 /* ---------------- MIDDLEWARE ---------------- */
-const cors = require("cors");
 
 app.use(cors({
   origin: [
