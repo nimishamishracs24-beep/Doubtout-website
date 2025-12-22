@@ -177,7 +177,7 @@ async function loadDashboardData() {
     // Fetch fresh points from backend
     try {
         const res = await fetch(
-            `http://localhost:3000/api/users/${savedUser.user_id}/points`
+            `http://doubtout-website.onrender.com/api/users/${savedUser.user_id}/points`
         );
         const data = await res.json();
 
