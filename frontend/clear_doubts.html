@@ -40,7 +40,7 @@
                 
                 <!-- Logo Block (Green Accent) -->
                 <div class="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="https://www.w3.org/2000/svg" class="h-7 w-7 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.057l-1.976-.662M12 14l-6.16 3.422a12.083 12.083 0 01-.665-6.479A11.952 11.952 0 0012 20.057l1.976-.662" />
                     </svg>
@@ -109,7 +109,7 @@
             
             <!-- Empty State -->
             <div id="empty-state" class="hidden text-center py-16 text-gray-500">
-                <svg class="mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mx-auto h-12 w-12 text-green-600" xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p class="mt-2 text-xl font-medium">Clear Sky!</p>
@@ -134,7 +134,7 @@ async function loadDoubts() {
 
     try {
         const res = await fetch(
-            `http://doubtout-website.onrender.com/api/professor/doubts/${professor.user_id}`
+            `https://doubtout-website.onrender.com/api/professor/doubts/${professor.user_id}`
         );
         const data = await res.json();
 
@@ -230,7 +230,7 @@ async function submitAnswer(doubtId) {
     }
 
     try {
-        const res = await fetch("http://doubtout-website.onrender.com/api/answers", {
+        const res = await fetch("https://doubtout-website.onrender.com/api/answers", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
