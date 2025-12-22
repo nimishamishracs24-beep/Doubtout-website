@@ -1,37 +1,20 @@
-require("dotenv").config();   // 👈 THIS LINE WAS MISSING
 const knex = require("knex");
 
-// PostgreSQL config
-const knexConfig = {
+const db = knex({
   client: "pg",
-  connection: {
-    host: process.env.PG_HOST,
-    user: process.env.PG_USER,
-    password: String(process.env.PG_PASSWORD), // force string
-    database: process.env.PG_DATABASE,
-    port: Number(process.env.PG_PORT),
-  },
-  pool: {
-    min: 2,
-    max: 10,
-  },
-};
+  connection: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-// Initialize Knex
-const db = knex(knexConfig);
-
-// Test DB connection
 async function connectDb() {
-  console.log("Connecting to the database...");
   try {
-    await db.raw("SELECT 1");
-    console.log("✅ Database connection successful.");
-  } catch (error) {
-    console.error("Database connection failed:", error.message);
-    throw error;
+    console.log("Connecting to the database...");
+    await db.raw("select 1");
+    console.log("✅ Database connected");
+  } catch (err) {
+    console.error("❌ Database connection failed:", err.message);
+    process.exit(1);
   }
 }
 
-// Exports
-module.exports = db;
-module.exports.connectDb = connectDb;
+module.exports = { db, connectDb };
