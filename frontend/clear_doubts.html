@@ -134,7 +134,7 @@ async function loadDoubts() {
 
     try {
         const res = await fetch(
-            `http://localhost:3000/api/professor/doubts/${professor.user_id}`
+            `http://doubtout-website.onrender.com/api/professor/doubts/${professor.user_id}`
         );
         const data = await res.json();
 
@@ -230,7 +230,7 @@ async function submitAnswer(doubtId) {
     }
 
     try {
-        const res = await fetch("http://localhost:3000/api/answers", {
+        const res = await fetch("http://doubtout-website.onrender.com/api/answers", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
