@@ -71,45 +71,7 @@
         </p>
 
         <!-- Filter Controls -->
-        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Status Filter -->
-                <div class="flex flex-col justify-center">
-                    <label for="status-filter" class="text-sm font-medium text-gray-700 mb-1">Filter by Status:</label>
-                    <select id="status-filter" onchange="filterAnswers()"
-                            class="p-2 border-2 border-gray-300 rounded-lg focus-ring-green transition duration-150 text-sm">
-                        <option value="">All Statuses</option>
-                        <option value="Published">Published</option>
-                        <option value="Draft">Draft</option>
-                        <option value="Needs Update">Needs Update</option>
-                    </select>
-                </div>
-                
-                <!-- Course Filter -->
-                <div class="flex flex-col justify-center">
-                    <label for="course-filter" class="text-sm font-medium text-gray-700 mb-1">Filter by Course:</label>
-                    <select id="course-filter" onchange="filterAnswers()"
-                            class="p-2 border-2 border-gray-300 rounded-lg focus-ring-green transition duration-150 text-sm">
-                        <option value="">All Courses</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="DSA">Data Structures & Algorithms</option>
-                        <option value="Operating Systems">Operating Systems</option>
-                        <option value="Computer Networks">Computer Networks</option>
-                    </select>
-                </div>
-
-                <!-- Button to Write a New Answer -->
-                <div class="flex items-end justify-end">
-                    <button onclick="alert('Navigating to New Answer Creation interface.')"
-                        class="w-full md:w-auto px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md transition duration-150 flex items-center justify-center">
-                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        Add New Expert Answer
-                    </button>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Professor Answers List Container -->
         <div class="bg-white p-6 rounded-xl shadow-lg">
