@@ -157,17 +157,9 @@ function renderAnswers(items) {
 }
 
 /* ---------------- FILTER ---------------- */
-window.filterAnswers = function () {
-    const selectedCourse = courseFilter.value;
-    const selectedStatus = statusFilter.value;
-
-    const filtered = professorAnswers.filter(a =>
-        (!selectedCourse || a.course === selectedCourse) &&
-        (!selectedStatus || a.status === selectedStatus)
-    );
-
-    renderAnswers(filtered);
-};
+function filterAnswers() {
+    renderAnswers(professorAnswers);
+}
 
 /* ---------------- LOAD DATA ---------------- */
 async function loadProfessorAnswers() {
