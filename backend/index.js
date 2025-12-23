@@ -10,9 +10,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors({
   origin: [
-    "https://doubt-out.netlify.app",   // Netlify frontend
-    "http://localhost:5500",           // local frontend
-    "http://127.0.0.1:5500"
+   "https://doubtout-website-frontend.onrender.com",
+    "http://localhost:5500"     // local frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
